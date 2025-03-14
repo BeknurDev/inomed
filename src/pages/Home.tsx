@@ -1,4 +1,4 @@
-import { Container, Typography, Button, Box, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import { Container, Typography, Button, Box, Grid, Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import useLocale from '../hooks/useLocale';
@@ -6,9 +6,11 @@ import Locale from '../locale';
 import { useNavigate } from 'react-router-dom';
 
 const Home: FC = () => {
-  const products = ["ИПП-11", "ИПЭБ-1М", "ИПП-1","Индивидуальная тактическая аптечка №1", 'Индивидуальная тактическая аптечка №2', "Универсальная шина TAYANCH"]
-  const locale = useLocale(Locale)
-  const navigate = useNavigate()
+  const products = ["ИПП-11", "ИПЭБ-1М", "ИПП-1","Индивидуальная тактическая аптечка №1", 'Индивидуальная тактическая аптечка №2', "Универсальная шина TAYANCH"];
+  const locale = useLocale(Locale);
+  const navigate = useNavigate();
+  window.scrollTo(0, 0);
+
   return (
     <Container maxWidth="lg">
       {/* Hero Section */}
@@ -20,18 +22,20 @@ const Home: FC = () => {
           background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3))',
           color: 'white',
           borderRadius: 2,
+          "@media (prefers-color-scheme: light)": {
+            background: 'linear-gradient(135deg, rgba(247, 247, 247, 0.8), rgba(255, 255, 255, 0.3))'
+          }
         }}
       >
         <motion.div
-          
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
         >
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h3" gutterBottom color='text.primary'>
             {locale.welcome}
           </Typography>
-          <Typography variant="h6" paragraph>
+          <Typography variant="h6" paragraph color='text.primary'>
             {locale.welcomeParagraph}
           </Typography>
           <Button variant="contained" color="primary" size="large">
@@ -59,27 +63,40 @@ const Home: FC = () => {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
-                whileHover={{
-                  cursor: "pointer",
-                  scale: 1.1,
-                  transition: { duration: 0.3 },
-                }}
               >
-                <Card>
-                  <CardMedia
-                    component="img"
-                    height="300"
-                    image={`/p${index}.png`}
-                    alt={`Product ${item}`}
-                  />
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                      {item}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" whiteSpace={'pre-line'}>
-                      {locale.productDescription[index]}
-                    </Typography>
-                  </CardContent>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 2,
+                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                      boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)',
+                    },
+                  }}
+                >
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      height="300"
+                      image={`/p${index}.png`}
+                      alt={`Product ${item}`}
+                      sx={{
+                        borderTopLeftRadius: 2,
+                        borderTopRightRadius: 2,
+                        objectFit: 'cover',
+                      }}
+                    />
+                    <CardContent>
+                      <Typography variant="h6" gutterBottom>
+                        {item}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" whiteSpace={'pre-line'}>
+                        {locale.productDescription[index]}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
                 </Card>
               </motion.div>
             </Grid>
@@ -107,17 +124,25 @@ const Home: FC = () => {
                 transition={{ duration: 0.8, delay: index * 0.3, ease: 'easeOut' }}
               >
                 <Card
+                  variant='outlined'
                   sx={{
                     textAlign: 'center',
                     padding: '20px',
                     borderRadius: 2,
-                    boxShadow: 2,
+                    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+                    '&:hover': {
+                      boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)',
+                    }
                   }}
                 >
                   <img
-                    src={`https://placeholder.com/150?text=${partner}`}
+                    src={"bg.png"}
                     alt={partner}
-                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      borderRadius: '8px',
+                    }}
                   />
                   <Typography variant="h6" mt={2} color='text.secondary'>
                     {partner}
@@ -140,7 +165,7 @@ const Home: FC = () => {
             {locale.callToActionTitle}
           </Typography>
           <Typography variant="h6" align="center" paragraph>
-          {locale.callToActionParagraph}
+            {locale.callToActionParagraph}
           </Typography>
           <Box sx={{ textAlign: 'center' }}>
             <Button variant="contained" color="primary" size="large">

@@ -1,16 +1,30 @@
-import { FC, useState, useEffect, useCallback } from 'react';
-import { AppBar, Toolbar, Typography, Button, Stack, IconButton, Drawer, List, ListItem, ListItemText, useMediaQuery } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
-import ChangeLangMenu from './ChangeLang';
-import useLocale from '../hooks/useLocale';
-import Locale from '../locale';
-import MenuIcon from '@mui/icons-material/Menu';
+import { FC, useState, useEffect, useCallback } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Stack,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useMediaQuery,
+  Divider,
+} from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import ChangeLangMenu from "./ChangeLang";
+import useLocale from "../hooks/useLocale";
+import Locale from "../locale";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Header: FC = () => {
   const locale = useLocale(Locale);
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const navigate = useNavigate();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -18,14 +32,14 @@ const Header: FC = () => {
     setDrawerOpen(!drawerOpen);
   };
 
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const updateTheme = useCallback(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setTheme(mediaQuery.matches ? 'dark' : 'light');
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setTheme(mediaQuery.matches ? "dark" : "light");
 
-    mediaQuery.addEventListener('change', () => {
-      setTheme(mediaQuery.matches ? 'dark' : 'light');
+    mediaQuery.addEventListener("change", () => {
+      setTheme(mediaQuery.matches ? "dark" : "light");
     });
   }, []);
 
@@ -37,10 +51,19 @@ const Header: FC = () => {
     <>
       <AppBar position="sticky" color="inherit">
         <Toolbar>
-          <Stack direction={'row'} gap={2} alignItems={'center'} sx={{ flexGrow: 1 }}>
+          <Stack
+            direction={"row"}
+            gap={2}
+            alignItems={"center"}
+            sx={{ flexGrow: 1, cursor: "pointer" }}
+            onClick={() => {
+              navigate("/");
+              window.scrollTo(0, 0);
+            }}
+          >
             <img
-              id='logo'
-              src={theme === 'dark' ? "/circleLight.png" : "/circleDark.png"}
+              id="logo"
+              src={theme === "dark" ? "/circleLight.png" : "/circleDark.png"}
               alt="Logo"
               width={40}
               height={40}
@@ -57,7 +80,7 @@ const Header: FC = () => {
           {!isMobile && (
             <>
               <Button
-                color={isActive('/') ? 'primary' : 'inherit'}
+                color={isActive("/") ? "primary" : "inherit"}
                 component={Link}
                 to="/"
                 sx={{ marginRight: 2 }}
@@ -65,7 +88,7 @@ const Header: FC = () => {
                 {locale.home}
               </Button>
               <Button
-                color={isActive('/about') ? 'primary' : 'inherit'}
+                color={isActive("/about") ? "primary" : "inherit"}
                 component={Link}
                 to="/about"
                 sx={{ marginRight: 2 }}
@@ -73,7 +96,7 @@ const Header: FC = () => {
                 {locale.about}
               </Button>
               <Button
-                color={isActive('/contact') ? 'primary' : 'inherit'}
+                color={isActive("/contact") ? "primary" : "inherit"}
                 component={Link}
                 to="/contact"
               >
@@ -87,17 +110,30 @@ const Header: FC = () => {
 
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
         <List sx={{ width: 250 }}>
-          <ListItem component={Link} to="/" onClick={toggleDrawer}>
-            <ListItemText primary={locale.home} sx={{ color: 'text.primary' }} />
-          </ListItem>
-          <ListItem component={Link} to="/about" onClick={toggleDrawer}>
-            <ListItemText primary={locale.about} sx={{ color: 'text.primary' }} />
-          </ListItem>
-          <ListItem component={Link} to="/contact" onClick={toggleDrawer}>
-            <ListItemText primary={locale.contact} sx={{ color: 'text.primary' }} />
-          </ListItem>
+          <Divider />
           <ListItem>
             <ChangeLangMenu />
+          </ListItem>
+          <Divider />
+          <ListItem component={Link} to="/" onClick={toggleDrawer}>
+            <ListItemText
+              primary={locale.home}
+              sx={{ color: "text.primary" }}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem component={Link} to="/about" onClick={toggleDrawer}>
+            <ListItemText
+              primary={locale.about}
+              sx={{ color: "text.primary" }}
+            />
+          </ListItem>
+          <Divider />
+          <ListItem component={Link} to="/contact" onClick={toggleDrawer}>
+            <ListItemText
+              primary={locale.contact}
+              sx={{ color: "text.primary" }}
+            />
           </ListItem>
         </List>
       </Drawer>

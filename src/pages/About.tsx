@@ -22,6 +22,7 @@ import Locale from "../locale";
 
 const About: FC = () => {
   const locale = useLocale(Locale);
+  window.scrollTo(0, 0);
   return (
     <Container maxWidth="lg">
       <Box sx={{ textAlign: "center", padding: "50px 0" }}>
