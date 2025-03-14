@@ -2,21 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { Container, Typography, Button, Box, Grid, Card, CardContent } from '@mui/material';
 import { FC } from 'react';
 import { motion } from 'framer-motion';
-import { Canvas } from '@react-three/fiber'; // For rendering 3D scene
-import { OrbitControls, useGLTF } from '@react-three/drei'; // For loading models and controls
 import useLocale from '../hooks/useLocale';
 import Locale from '../locale';
 
 const Home: FC = () => {
-  const products = ["ИПП-11"];
-  const locale = useLocale(Locale);
-
-  // Component for loading and displaying 3D models
-  const Product3DModel = ({ modelPath }: { modelPath: string }) => {
-    const { scene } = useGLTF(modelPath);
-    return <primitive object={scene} scale={0.5} />;
-  };
-
+  const products = ["ИПП-11", "ИПЭБ-1М", "ИПП-1","Индивидуальная тактическая аптечка №1", 'Индивидуальная тактическая аптечка №2', "Универсальная шина TAYANCH"]
+  const locale = useLocale(Locale)
   return (
     <Container maxWidth="lg">
       {/* Hero Section */}
@@ -71,14 +62,13 @@ const Home: FC = () => {
                   transition: { duration: 0.3 },
                 }}
               >
-                <Card sx={{ padding: 2 }}>
-                  <Canvas style={{ width: '100%', height: '300px' }}>
-                    <ambientLight intensity={0.5} />
-                    <spotLight position={[10, 10, 10]} angle={0.15} />
-                    <OrbitControls />
-                    {/* Replace 'modelPath' with actual path to your 3D model */}
-                    <Product3DModel modelPath={`3d${index+1}.glb`} />
-                  </Canvas>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="300"
+                    image={`/p${index}.png`}
+                    alt={`Product ${item}`}
+                  />
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
                       {item}
