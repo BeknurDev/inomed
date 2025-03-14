@@ -1,4 +1,5 @@
-import { Container, Typography, Button, Box, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import { Container, Typography, Button, Box, Grid, Card, CardContent } from '@mui/material';
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import useLocale from '../hooks/useLocale';
@@ -21,7 +22,6 @@ const Home: FC = () => {
         }}
       >
         <motion.div
-          
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
@@ -84,68 +84,7 @@ const Home: FC = () => {
         </Grid>
       </Box>
 
-      {/* Partners Section */}
-      <Box sx={{ padding: '50px 0' }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
-          <Typography variant="h4" gutterBottom align="center">
-            {locale.partners}
-          </Typography>
-        </motion.div>
-        <Grid container justifyContent="center" spacing={4} mt={2}>
-          {['Partner 1', 'Partner 2', 'Partner 3', 'Partner 4'].map((partner, index) => (
-            <Grid item xs={6} sm={3} key={index}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.3, ease: 'easeOut' }}
-              >
-                <Card
-                  sx={{
-                    textAlign: 'center',
-                    padding: '20px',
-                    borderRadius: 2,
-                    boxShadow: 2,
-                  }}
-                >
-                  <img
-                    src={`https://placeholder.com/150?text=${partner}`}
-                    alt={partner}
-                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-                  />
-                  <Typography variant="h6" mt={2} color='text.secondary'>
-                    {partner}
-                  </Typography>
-                </Card>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-
-      {/* Main Section with Call to Action */}
-      <Box sx={{ padding: '80px 0' }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
-          <Typography variant="h4" align="center" gutterBottom>
-            {locale.callToActionTitle}
-          </Typography>
-          <Typography variant="h6" align="center" paragraph>
-          {locale.callToActionParagraph}
-          </Typography>
-          <Box sx={{ textAlign: 'center' }}>
-            <Button variant="contained" color="primary" size="large">
-              {locale.startYourJourney}
-            </Button>
-          </Box>
-        </motion.div>
-      </Box>
+      {/* Additional Sections... */}
     </Container>
   );
 };

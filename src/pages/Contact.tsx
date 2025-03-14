@@ -8,7 +8,7 @@ import {
   Grid,
   IconButton,
 } from "@mui/material";
-import { motion } from "framer-motion"; // For animations
+import { motion } from "framer-motion";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -20,7 +20,6 @@ const Contact: FC = () => {
   return (
     <Container maxWidth="md">
       <Box sx={{ textAlign: "center", padding: "50px 0" }}>
-        {/* Animated Contact Header */}
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -31,7 +30,6 @@ const Contact: FC = () => {
           </Typography>
         </motion.div>
 
-        {/* Contact Form Inputs with animations */}
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -115,7 +113,7 @@ const Contact: FC = () => {
           />
         </motion.div>
 
-        {/* Animated Submit Button */}
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -129,7 +127,7 @@ const Contact: FC = () => {
               marginTop: "20px",
               "&:hover": {
                 backgroundColor: "primary.dark",
-                transform: "scale(1.1)", // Scale effect for hover
+                transform: "scale(1.1)",
                 transition: "transform 0.3s ease",
               },
             }}
