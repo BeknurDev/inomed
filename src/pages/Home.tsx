@@ -1,11 +1,22 @@
-import { Container, Typography, Button, Box, Grid, Card, CardContent, CardMedia } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import { Container, Typography, Button, Box, Grid, Card, CardContent } from '@mui/material';
 import { FC } from 'react';
 import { motion } from 'framer-motion';
+import { Canvas } from '@react-three/fiber'; // For rendering 3D scene
+import { OrbitControls, useGLTF } from '@react-three/drei'; // For loading models and controls
 import useLocale from '../hooks/useLocale';
 import Locale from '../locale';
 
 const Home: FC = () => {
-  const locale = useLocale(Locale)
+  const products = ["ИПП-11"];
+  const locale = useLocale(Locale);
+
+  // Component for loading and displaying 3D models
+  const Product3DModel = ({ modelPath }: { modelPath: string }) => {
+    const { scene } = useGLTF(modelPath);
+    return <primitive object={scene} scale={0.5} />;
+  };
+
   return (
     <Container maxWidth="lg">
       {/* Hero Section */}
@@ -20,7 +31,6 @@ const Home: FC = () => {
         }}
       >
         <motion.div
-          
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'easeOut' }}
@@ -49,26 +59,32 @@ const Home: FC = () => {
           </Typography>
         </motion.div>
         <Grid container spacing={4} justifyContent="center" mt={2}>
-          {[1, 2, 3].map((item, index) => (
+          {products.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2, ease: 'easeOut' }}
+                transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
+                whileHover={{
+                  cursor: "pointer",
+                  scale: 1.1,
+                  transition: { duration: 0.3 },
+                }}
               >
-                <Card>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={`https://via.placeholder.com/300?text=Product+${item}`}
-                    alt={`Product ${item}`}
-                  />
+                <Card sx={{ padding: 2 }}>
+                  <Canvas style={{ width: '100%', height: '300px' }}>
+                    <ambientLight intensity={0.5} />
+                    <spotLight position={[10, 10, 10]} angle={0.15} />
+                    <OrbitControls />
+                    {/* Replace 'modelPath' with actual path to your 3D model */}
+                    <Product3DModel modelPath={`3d${index+1}.glb`} />
+                  </Canvas>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
-                     {item}
+                      {item}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {locale.productDescription}
+                    <Typography variant="body2" color="text.secondary" whiteSpace={'pre-line'}>
+                      {locale.productDescription[index]}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -78,68 +94,7 @@ const Home: FC = () => {
         </Grid>
       </Box>
 
-      {/* Partners Section */}
-      <Box sx={{ padding: '50px 0' }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
-          <Typography variant="h4" gutterBottom align="center">
-            {locale.partners}
-          </Typography>
-        </motion.div>
-        <Grid container justifyContent="center" spacing={4} mt={2}>
-          {['Partner 1', 'Partner 2', 'Partner 3', 'Partner 4'].map((partner, index) => (
-            <Grid item xs={6} sm={3} key={index}>
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.3, ease: 'easeOut' }}
-              >
-                <Card
-                  sx={{
-                    textAlign: 'center',
-                    padding: '20px',
-                    borderRadius: 2,
-                    boxShadow: 2,
-                  }}
-                >
-                  <img
-                    src={`https://placeholder.com/150?text=${partner}`}
-                    alt={partner}
-                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-                  />
-                  <Typography variant="h6" mt={2} color='text.secondary'>
-                    {partner}
-                  </Typography>
-                </Card>
-              </motion.div>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-
-      {/* Main Section with Call to Action */}
-      <Box sx={{ padding: '80px 0' }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
-          <Typography variant="h4" align="center" gutterBottom>
-            {locale.callToActionTitle}
-          </Typography>
-          <Typography variant="h6" align="center" paragraph>
-          {locale.callToActionParagraph}
-          </Typography>
-          <Box sx={{ textAlign: 'center' }}>
-            <Button variant="contained" color="primary" size="large">
-              {locale.startYourJourney}
-            </Button>
-          </Box>
-        </motion.div>
-      </Box>
+      {/* Additional Sections... */}
     </Container>
   );
 };

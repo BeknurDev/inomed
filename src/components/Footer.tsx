@@ -14,6 +14,9 @@ const Footer: FC = () => {
           <Typography variant="body2" color="text.secondary">
             {locale.allRights}
           </Typography>
+          <Typography variant="body2" color="text.secondary" mt={1}>
+            Uzbekistan, Tashkent
+          </Typography>
         </Box>
 
         {/* Social Media Icons */}
