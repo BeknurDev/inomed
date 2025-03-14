@@ -5,6 +5,7 @@ import useLocale from '../hooks/useLocale';
 import Locale from '../locale';
 
 const Home: FC = () => {
+  const products = ["ИПП-11", "ИПЭБ-1М", "ИПП-1","Индивидуальная тактическая аптечка №1", 'Индивидуальная тактическая аптечка №2', "Универсальная шина TAYANCH"]
   const locale = useLocale(Locale)
   return (
     <Container maxWidth="lg">
@@ -49,26 +50,31 @@ const Home: FC = () => {
           </Typography>
         </motion.div>
         <Grid container spacing={4} justifyContent="center" mt={2}>
-          {[1, 2, 3].map((item, index) => (
+          {products.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2, ease: 'easeOut' }}
+                transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
+                whileHover={{
+                  cursor: "pointer",
+                  scale: 1.1,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <Card>
                   <CardMedia
                     component="img"
-                    height="140"
-                    image={`https://via.placeholder.com/300?text=Product+${item}`}
+                    height="300"
+                    image={`/p${index}.png`}
                     alt={`Product ${item}`}
                   />
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
-                     {item}
+                      {item}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {locale.productDescription}
+                    <Typography variant="body2" color="text.secondary" whiteSpace={'pre-line'}>
+                      {locale.productDescription[index]}
                     </Typography>
                   </CardContent>
                 </Card>
