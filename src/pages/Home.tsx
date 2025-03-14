@@ -3,10 +3,12 @@ import { FC } from 'react';
 import { motion } from 'framer-motion';
 import useLocale from '../hooks/useLocale';
 import Locale from '../locale';
+import { useNavigate } from 'react-router-dom';
 
 const Home: FC = () => {
   const products = ["ИПП-11", "ИПЭБ-1М", "ИПП-1","Индивидуальная тактическая аптечка №1", 'Индивидуальная тактическая аптечка №2', "Универсальная шина TAYANCH"]
   const locale = useLocale(Locale)
+  const navigate = useNavigate()
   return (
     <Container maxWidth="lg">
       {/* Hero Section */}
@@ -53,6 +55,7 @@ const Home: FC = () => {
           {products.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <motion.div
+                onClick={() => navigate(`/product/${index}`)}
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1, ease: 'easeOut' }}
