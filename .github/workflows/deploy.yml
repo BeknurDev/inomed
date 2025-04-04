@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: read
-  pages: write      # Ensure pages permission is set to write
+  pages: write
   id-token: write
 
 concurrency:
@@ -38,7 +38,7 @@ jobs:
     - name: Setup Pages
       uses: actions/configure-pages@v2
       with:
-        token: ${{ secrets.GH_TOKEN }}  # Use your personal access token (PAT) if necessary
+        token: ${{ secrets.GH_TOKEN }}
         enablement: true
 
     - name: Upload Pages artifact
