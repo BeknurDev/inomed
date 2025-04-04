@@ -9,6 +9,7 @@ import { ThemeProvider } from '@emotion/react';
 import { lightMode, darkMode } from './theme';
 import { useMediaQuery } from '@mui/material';
 import { CoreContextProvider } from './context/CoreContext';
+import Product from './pages/Product';
 
 const App: FC = () => {
   const language = localStorage.getItem("lang") || "ru";
@@ -48,6 +49,7 @@ const App: FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/product/:id" element={<Product />} />
         </Routes>
         <Footer />
       </Router>

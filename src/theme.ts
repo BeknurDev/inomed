@@ -36,27 +36,27 @@ export const lightMode = createTheme({
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', // Custom font for the theme
     h1: {
-      fontSize: "2rem",
+      fontSize: "2.5rem",
       fontWeight: 700,
     },
     h2: {
-      fontSize: "1.75rem",
+      fontSize: "2,25rem",
       fontWeight: 700,
     },
     h3: {
-      fontSize: "1.5rem",
+      fontSize: "2rem",
       fontWeight: 700,
     },
     h4: {
-      fontSize: "1.25rem",
+      fontSize: "1.75rem",
       fontWeight: 700,
     },
     h5: {
-      fontSize: "1.125rem",
+      fontSize: "1.50rem",
       fontWeight: 700,
     },
     h6: {
-      fontSize: "1rem",
+      fontSize: "1.25rem",
       fontWeight: 700,
     },
     body1: {
@@ -145,27 +145,27 @@ export const darkMode = createTheme({
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif', // Custom font for the theme
     h1: {
-      fontSize: "2rem",
+      fontSize: "2.5rem",
       fontWeight: 700,
     },
     h2: {
-      fontSize: "1.75rem",
+      fontSize: "2,25rem",
       fontWeight: 700,
     },
     h3: {
-      fontSize: "1.5rem",
+      fontSize: "2rem",
       fontWeight: 700,
     },
     h4: {
-      fontSize: "1.25rem",
+      fontSize: "1.75rem",
       fontWeight: 700,
     },
     h5: {
-      fontSize: "1.125rem",
+      fontSize: "1.50rem",
       fontWeight: 700,
     },
     h6: {
-      fontSize: "1rem",
+      fontSize: "1.25rem",
       fontWeight: 700,
     },
     body1: {

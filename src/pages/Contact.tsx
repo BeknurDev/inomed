@@ -5,33 +5,40 @@ import {
   TextField,
   Button,
   Box,
-  Grid,
-  IconButton,
 } from "@mui/material";
-import { motion } from "framer-motion"; // For animations
-import TelegramIcon from "@mui/icons-material/Telegram";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { motion } from "framer-motion";
 import useLocale from "../hooks/useLocale";
 import Locale from "../locale";
 
 const Contact: FC = () => {
   const locale = useLocale(Locale)
+  window.scrollTo(0, 0);
   return (
     <Container maxWidth="md">
       <Box sx={{ textAlign: "center", padding: "50px 0" }}>
-        {/* Animated Contact Header */}
+        
+        <Box
+        mt={2}
+        sx={{
+          textAlign: 'center',
+          padding: 8,
+          background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3))',
+          color: 'white',
+          borderRadius: 2,
+          "@media (prefers-color-scheme: light)": {
+            background: 'linear-gradient(135deg, rgba(247, 247, 247, 0.8), rgba(255, 255, 255, 0.3))'
+          }
+        }}
+      >
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom color="text.primary">
             {locale.contactUs}
           </Typography>
         </motion.div>
-
-        {/* Contact Form Inputs with animations */}
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -115,7 +122,7 @@ const Contact: FC = () => {
           />
         </motion.div>
 
-        {/* Animated Submit Button */}
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -129,7 +136,7 @@ const Contact: FC = () => {
               marginTop: "20px",
               "&:hover": {
                 backgroundColor: "primary.dark",
-                transform: "scale(1.1)", // Scale effect for hover
+                transform: "scale(1.1)",
                 transition: "transform 0.3s ease",
               },
             }}
@@ -137,14 +144,13 @@ const Contact: FC = () => {
             {locale.sendMessage}
           </Button>
         </motion.div>
-
+        </Box>
         {/* Social Media Links */}
-        <Box sx={{ marginTop: "40px" }}>
+        {/* <Box sx={{ marginTop: "40px" }}>
           <Typography variant="h6" gutterBottom>
             {locale.connectWithUs}
           </Typography>
           <Grid container spacing={2} justifyContent="center">
-            {/* Telegram Icon */}
             <Grid item>
               <IconButton
                 color="primary"
@@ -155,8 +161,6 @@ const Contact: FC = () => {
                 <TelegramIcon fontSize="large" />
               </IconButton>
             </Grid>
-
-            {/* Instagram Icon */}
             <Grid item>
               <IconButton
                 color="primary"
@@ -167,8 +171,6 @@ const Contact: FC = () => {
                 <InstagramIcon fontSize="large" />
               </IconButton>
             </Grid>
-
-            {/* LinkedIn Icon */}
             <Grid item>
               <IconButton
                 color="primary"
@@ -180,7 +182,7 @@ const Contact: FC = () => {
               </IconButton>
             </Grid>
           </Grid>
-        </Box>
+        </Box> */}
 
         {/* Google Map Embed */}
         <Box sx={{ marginTop: "40px" }}>
