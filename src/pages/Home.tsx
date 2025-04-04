@@ -33,30 +33,6 @@ const Home: FC = () => {
   const navigate = useNavigate();
   window.scrollTo(0, 0);
 
-  // const useVoice = async () => {
-  //   const axiosInstance = axios.create({
-  //     baseURL: import.meta.env.VITE_UZBEKVOICE_URL,
-  //     headers: {
-  //       'Authorization': import.meta.env.VITE_UZBEKVOICE_API_KEY,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-
-  //   try {
-  //     const response = await axiosInstance.post('/tts', {
-  //       text: "ASSALOMU ALAYKUM, INOMEDGA HUSH KELIBSIZ",
-  //       model: "davron-neutral"
-  //     });
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.error("Error in useVoice:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   useVoice();
-  // }, []);
-
   return (
     <>
       {/* Hero Section */}
