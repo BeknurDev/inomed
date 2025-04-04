@@ -5,6 +5,7 @@ export interface IMainAppOptions {
     locale: Record<string, any>;
     config?: Record<string, any>;
     isMobile?: boolean;
+    toggleTheme?: CallableFunction
   }
 
 export type IContext = IMainAppOptions;

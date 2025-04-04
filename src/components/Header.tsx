@@ -32,7 +32,7 @@ const Header: FC = () => {
     setDrawerOpen(!drawerOpen);
   };
 
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:700px)");
 
   const updateTheme = useCallback(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

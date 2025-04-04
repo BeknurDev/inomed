@@ -12,7 +12,7 @@ html, body {
   :root {
     color: #2f2f2f;
     background-color: #ffffff;
-    background-image: url('/public/logoLight.png');
+    background-image: url('/logoLight.png');
   }
   a:hover {
     color: #747bff;
@@ -26,7 +26,7 @@ html, body {
   :root {
     color: #ffffff;
     background-color: #2f2f2f;
-    background-image: url('/public/LogoDark.png');
+    background-image: url('/LogoDark.png');
   }
   a:hover {
     color: #747bff;
