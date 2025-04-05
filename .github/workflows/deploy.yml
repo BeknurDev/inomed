@@ -54,8 +54,6 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true  # Remove this 'with' block if Pages is already enabled manually
 
       - name: Upload Pages artifact
         uses: actions/upload-artifact@v4
@@ -82,3 +80,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # Optional: Retry deployment up to 3 times with a 5-second delay
+          retry: 3
+          retry-delay: 5
