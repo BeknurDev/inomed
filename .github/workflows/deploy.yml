@@ -35,14 +35,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Prepare Clean Dist
+      - name: Prepare Minimal Dist
         run: |
-          rm -rf dist-clean
-          mkdir -p dist-clean
-          cp -rL dist/* dist-clean/
-          rm -f dist-clean/p1.mp4  # Exclude the MP4 file
           rm -rf dist
-          mv dist-clean dist
+          mkdir -p dist
+          echo "<h1>Hello from GitHub Pages</h1>" > dist/index.html
 
       - name: Debug Dist Contents
         run: |
