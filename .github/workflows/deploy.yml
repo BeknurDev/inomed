@@ -34,11 +34,16 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: List Dist Contents
-        run: ls -laR dist 
-
-      - name: Check Dist Size
-        run: du -sh dist 
+      - name: Debug Dist Contents
+        run: |
+          echo "Size of dist:"
+          du -sh dist
+          echo "Listing contents:"
+          ls -laR dist
+          echo "Checking for symlinks:"
+          find dist -type l
+          echo "Checking for large files (>100MB):"
+          find dist -type f -size +100M
 
       - name: Remove Symlinks and Copy Files
         run: |
@@ -49,7 +54,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
-          enablement: true 
+          enablement: true  # Remove if Pages is manually enabled
 
       - name: Upload Pages artifact
         uses: actions/upload-artifact@v4
@@ -64,6 +69,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Download Artifact for Debugging
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: downloaded-dist
+
+      - name: List Downloaded Contents
+        run: ls -laR downloaded-dist
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
