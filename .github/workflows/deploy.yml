@@ -2,9 +2,9 @@ name: Deploy React Application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -19,32 +19,28 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build
+      - name: Build
+        run: npm run build
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v2
-      with:
-        token: ${{ secrets.GH_TOKEN }}
-        enablement: true
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-    - name: Upload Pages artifact
-      uses: actions/upload-artifact@v4
-      with:
-        path: dist
+      - name: Upload Pages artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: dist
 
   deploy:
     environment:
@@ -55,4 +51,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
