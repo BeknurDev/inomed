@@ -20,7 +20,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -38,7 +39,7 @@ jobs:
         run: |
           rm -rf dist-clean
           mkdir -p dist-clean
-          cp -rL dist/* dist-clean/
+          cp -rL dist/* dist-clean/  # Dereference symlinks
           rm -rf dist
           mv dist-clean dist
 
@@ -56,7 +57,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
-          enablement: true  # Remove if Pages is manually enabled
+          enablement: true  # Remove this 'with' block if Pages is already enabled manually
 
       - name: Upload Pages artifact
         uses: actions/upload-artifact@v4
@@ -70,3 +71,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    steps:
+      - name: Download Artifact for Debugging
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: downloaded-dist
+
+      - name: List Downloaded Contents
+        run: ls -laR downloaded-dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
