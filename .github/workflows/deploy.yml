@@ -55,7 +55,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-          enablement: true
+        uses: actions/deploy-pages@v1
