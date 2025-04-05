@@ -34,6 +34,14 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Prepare Clean Dist
+        run: |
+          rm -rf dist-clean
+          mkdir -p dist-clean
+          cp -rL dist/* dist-clean/
+          rm -rf dist
+          mv dist-clean dist
+
       - name: Debug Dist Contents
         run: |
           echo "Size of dist:"
@@ -44,12 +52,6 @@ jobs:
           find dist -type l
           echo "Checking for large files (>100MB):"
           find dist -type f -size +100M
-
-      - name: Remove Symlinks and Copy Files
-        run: |
-          mkdir -p dist-clean
-          cp -rL dist/* dist-clean/  # Dereference symlinks
-          mv dist-clean dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -68,16 +70,3 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-    steps:
-      - name: Download Artifact for Debugging
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: downloaded-dist
-
-      - name: List Downloaded Contents
-        run: ls -laR downloaded-dist
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
