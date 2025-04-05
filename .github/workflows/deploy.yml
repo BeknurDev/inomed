@@ -34,6 +34,18 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: List Dist Contents
+        run: ls -laR dist 
+
+      - name: Check Dist Size
+        run: du -sh dist 
+
+      - name: Remove Symlinks and Copy Files
+        run: |
+          mkdir -p dist-clean
+          cp -rL dist/* dist-clean/  # Dereference symlinks
+          mv dist-clean dist
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
