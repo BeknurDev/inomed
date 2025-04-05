@@ -39,7 +39,8 @@ jobs:
         run: |
           rm -rf dist-clean
           mkdir -p dist-clean
-          cp -rL dist/* dist-clean/  # Dereference symlinks
+          cp -rL dist/* dist-clean/
+          rm -f dist-clean/p1.mp4  # Exclude the MP4 file
           rm -rf dist
           mv dist-clean dist
 
